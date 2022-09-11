@@ -16,7 +16,7 @@
                 </div>
             </div>
             <a href="index.html">
-                <img class="img-fluid" src="assets/images/logo.png" alt="Theme-Logo" />
+                <img class="img-fluid" src="{{asset('admin/assets/images/logo.png')}}" alt="Theme-Logo" />
             </a>
             <a class="mobile-options waves-effect waves-light">
                 <i class="ti-more"></i>
@@ -44,7 +44,7 @@
                 </li>
             </ul>
             <ul class="nav-right">
-                <li class="header-notification">
+                {{-- <li class="header-notification">
                     <a href="#!" class="waves-effect waves-light">
                         <i class="ti-bell"></i>
                         <span class="badge bg-c-red"></span>
@@ -66,11 +66,11 @@
                         </li>
                
                     </ul>
-                </li>
+                </li> --}}
                 <li class="user-profile header-notification " >
                     <a href="#!" class="waves-effect waves-light">
-                        <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                        <span>John Doe</span>
+                        <img src="{{asset('admin/assets/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
+                        <span>  {{ Auth::user()->name }}</span>
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification" style="text-decoration: none !important;">
@@ -95,9 +95,18 @@
                             </a>
                         </li>
                         <li class="waves-effect waves-light">
-                            <a href="auth-normal-sign-in.html">
+                            {{-- <a href="auth-normal-sign-in.html">
                                 <i class="ti-layout-sidebar-left"></i> Logout
+                            </a> --}}
+                            <a  href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="ti-layout-sidebar-left"></i>
+                                {{ __('Logout') }}
                             </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </li>

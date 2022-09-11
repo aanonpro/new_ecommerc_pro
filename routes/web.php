@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,16 +26,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
-    // Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+// Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
+//     // Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 
-    Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+//     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
 
-});
-
-
-// Route::middleware(['auth','isAdmin'])->group(function () {
-//     Route::get('/dashboard', function (){
-//         return view('admin.index');
-//     });
 // });
+
+
+Route::middleware(['auth','isAdmin'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    Route::resource('categories', CategoryController::class);
+
+    // Route::get('/categories', [CategoryController::class, 'index']);
+    // Route::get('/add-category', [CategoryController::class, 'create']);
+    // Route::post('/add-category', [CategoryController::class, 'store']);
+});
