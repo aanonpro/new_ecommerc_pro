@@ -31,12 +31,12 @@
               <!-- Page-body start -->
               <div class="page-body ">
                   <div class="row">
-                     
+
 
                       <!--  project and team member start -->
                       <div class="col-xl-12 col-md-12">
                           <div class="card table-card">
-                            
+
                               <div class="card-block">
                                   <div class="table-responsive">
                                       <table class="table table-hover">
@@ -57,11 +57,11 @@
                                               <th>Name</th>
                                               <th>Date</th>
                                               <th>Status</th>
-                                              <th class="text-right">Action</th>
+                                              <th>Action</th>
                                           </tr>
                                           </thead>
                                           <tbody>
-                                            @foreach ($categories as $category)
+                                            @forelse ($categories as $category)
                                                 <tr>
                                                     <td>
                                                         <div class="chk-option">
@@ -75,7 +75,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="d-inline-block align-middle">
-                                                            <img src="{{asset('uploads/category/'.$category->image)}}" alt="{{$category->name}}" class="img-radius img-40 align-top m-r-15">
+                                                            <img src="{{asset('image/'.$category->image)}}" alt="{{$category->name}}" class="img-radius img-40 align-top m-r-15">
                                                             <div class="d-inline-block">
                                                                 <h6>{{$category->name}}</h6>
                                                                 <p class="text-muted m-b-0">{{$category->description}}</p>
@@ -87,16 +87,35 @@
                                                     <td>
                                                         {{$category->status == '1' ? 'Active':'Disabled'}}
                                                     </td>
-                                                    <td class="text-right"><label class="label label-warning">Edit</label></td>
-                                                    <td><label class="label label-danger">Delete</label></td>
+                                                    <td>
+                                                        <form action="{{ route('categories.destroy',$category->id) }}" method="POST">
+
+                                                            <a class="btn btn-mat btn-sm waves-effect waves-light btn-warning" href="{{ route('categories.edit',$category->id) }}">Edit</a>
+
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button type="submit" class="btn btn-mat btn-sm waves-effect waves-light btn-danger">Delete</button>
+
+                                                        </form>
+                                                    </td>
                                                 </tr>
-                                            @endforeach                                               
-                                        
+                                            @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center text-danger">
+
+                                                    <div class="d-inline-block align-middle">
+                                                        <h4>No Categories added</h4>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                            @endforelse
+
+
                                           </tbody>
                                       </table>
-                                      <div class="text-right m-r-20">
-                                          <a href="#!" class=" b-b-primary text-primary">View all Projects</a>
-                                      </div>
+
                                   </div>
                               </div>
                           </div>

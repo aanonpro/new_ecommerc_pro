@@ -38,28 +38,52 @@
         </div>
         {{-- <div class="pcoded-navigation-label" data-i18n="nav.category.navigation">Layout</div> --}}
         <ul class="pcoded-item pcoded-left-item">
-            <li class="active">
-                <a href="index.html" class="waves-effect waves-dark">
+            <li class="{{ (request()->is('dashboard')) ? 'active' : '' }}">
+                <a href="{{url('dashboard')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-home"></i><b>D</b></span>
                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
             </li>
-            <li class="pcoded-hasmenu">
+            <li class="pcoded-hasmenu {{ Request::is('categories') || Request::is('categories/create') || Request::is('categories/*') ? 'pcoded-submenu active':'' }} ">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
                     <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Category</span>
                     <span class="pcoded-mcaret"></span>
                 </a>
                 <ul class="pcoded-submenu">
-                    <li class=" ">
-                        <a href="{{route('categories.index')}}" class="waves-effect waves-dark">
+                    <li class=" {{ Request::is('categories') || Request::is('categories/create') || Request::is('categories/*')  ? 'show':'' }}">
+                        <a href=" {{route('categories.index')}}" class="waves-effect waves-dark {{ Request::is('categories') || Request::is('categories/*')  ? 'active':'' }}">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">View Category</span>
                             <span class="pcoded-mcaret"></span>
                         </a>
                     </li>
-                    <li class=" ">
+                    <li class="  {{ (request()->is('categories/create')) ? 'active' : '' }} ">
+                        <a href="{{route('categories.create')}}" class="waves-effect waves-dark">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Add Category</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+{{--
+            <li class="pcoded-hasmenu {{ (request()->is('categories*')) ? 'active' : '' }}">
+                <a href="javascript:void(0)" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Category</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+                <ul class="pcoded-submenu">
+                    <li class=" {{ (request()->is('categories')) ? 'active' : '' }} ">
+                        <a href=" {{route('categories.index')}}" class="waves-effect waves-dark ">
+                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">View Category</span>
+                            <span class="pcoded-mcaret"></span>
+                        </a>
+                    </li>
+                    <li class=" {{ (request()->is('categories/create')) ? 'active' : '' }} ">
                         <a href="{{route('categories.create')}}" class="waves-effect waves-dark">
                             <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                             <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Add Category</span>
@@ -67,7 +91,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="pcoded-hasmenu">
                 <a href="javascript:void(0)" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>

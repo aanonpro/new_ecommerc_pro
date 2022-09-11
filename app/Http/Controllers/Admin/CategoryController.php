@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -15,8 +16,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.category.index', compact('categories'));
+
+
+        $categories = Category::latest()->paginate(5);
+        return view('admin.category.index', compact('categories'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);;
     }
 
     /**
@@ -37,20 +41,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-    
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $input = $request->all();
-        if($request->hasFile('image'))
-        {
-            $file = $request->file('image');
-            $ext = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $ext;
-            $file->move('uploads/category'.$filename);
-            $input['image'] = $filename;
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
         }
 
-        Category::create($request->all());
+        Category::create($input);
 
-        return redirect()->route('categories.index')->with('message','Category Added successfully');
+        return redirect()->route('categories.index')
+                        ->with('message','Categories added successfully');
+
     }
 
     /**
@@ -72,7 +83,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.category.edit',compact('category'));
     }
 
     /**
@@ -84,7 +95,30 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required'
+        ]);
+
+        $input = $request->all();
+
+        if($request->hasFile('image')){
+            $path = 'image/'.$category->image;
+            if(File::exists($path)){
+                File::delete($path);
+            }
+            if ($image = $request->file('image')) {
+                $destinationPath = 'image/';
+                $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $profileImage);
+                $input['image'] = "$profileImage";
+            }
+        }
+
+        $category->update($input);
+
+        return redirect()->route('categories.index')
+                        ->with('message','Category updated successfully');
     }
 
     /**
@@ -95,6 +129,15 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if($category->image){
+            $path = 'image/'.$category->image;
+            if(File::exists($path)){
+                File::delete($path);
+            }
+        }
+        $category->delete();
+
+        return redirect()->route('categories.index')
+                        ->with('message','Category deleted successfully');
     }
 }
