@@ -1,5 +1,5 @@
-<nav class="navbar header-navbar pcoded-header">
-    <div class="navbar-wrapper">
+<nav class="navbar header-navbar pcoded-header" >
+    <div class="navbar-wrapper" >
         <div class="navbar-logo">
             <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="#!">
                 <i class="ti-menu"></i>

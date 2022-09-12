@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Mega Able bootstrap admin template by codedthemes </title>
+    <title>@yield('title') </title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 10]>
@@ -151,5 +151,15 @@
      <!-- custom js -->
      <script type="text/javascript" src="{{ asset('admin/assets/pages/dashboard/custom-dashboard.js')}}"></script>
      <script type="text/javascript" src="{{ asset('admin/assets/js/script.js')}}"></script>
+
+      {{-- sweetalert --}}
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+     @if(session('message'))
+        <script>
+            swal("Successfully!", "{{session('message')}}", "success");
+        </script>
+     @endif
+
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 
@@ -38,6 +39,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('categories', CategoryController::class);
+    Route::resource('products', ProductController::class);
 
     // Route::get('/categories', [CategoryController::class, 'index']);
     // Route::get('/add-category', [CategoryController::class, 'create']);

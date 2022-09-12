@@ -9,11 +9,7 @@ use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   //index
     public function index()
     {
 
@@ -23,22 +19,13 @@ class CategoryController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * 5);;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  //create
     public function create()
     {
         return view('admin.category.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   //add
     public function store(Request $request)
     {
 
@@ -56,6 +43,7 @@ class CategoryController extends Controller
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
         }
+        $input['popular'] = $request->popular == true ? '1':'0';
 
         Category::create($input);
 
@@ -64,35 +52,19 @@ class CategoryController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+    //show
     public function show(Category $category)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+  // edit
     public function edit(Category $category)
     {
         return view('admin.category.edit',compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+    //update 
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -114,19 +86,14 @@ class CategoryController extends Controller
                 $input['image'] = "$profileImage";
             }
         }
-
+        $input['popular'] = $request->popular == true ? '1':'0';
         $category->update($input);
 
         return redirect()->route('categories.index')
                         ->with('message','Category updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+    // delete 
     public function destroy(Category $category)
     {
         if($category->image){

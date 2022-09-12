@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','View Categories')
+@section('title', 'View Products')
 @section('contents')
 <!-- Page-header start -->
 <div class="page-header">
@@ -7,8 +7,8 @@
         <div class="row align-items-center">
             <div class="col-md-8">
                 <div class="page-header-title">
-                    <h5 class="m-b-10">Categories View List</h5>
-                    <p class="m-b-0">Welcome to Mega Able</p>
+                    <h5 class="m-b-10">Products View Lists</h5>
+                    <p class="m-b-0">Welcome to Categories page</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -46,20 +46,25 @@
                                                             <label class="check-task">
                                                                 <input type="checkbox" value="">
                                                                 <span class="cr">
-                                                                    <i class="cr-icon fa fa-check txt-default"></i>
-                                                                </span>
+                                                                        <i class="cr-icon fa fa-check txt-default"></i>
+                                                                    </span>
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    All Categories</th>
+                                                    All Products</th>
                                                 <th>Name</th>
-                                                <th>Date</th>
+                                                <th>category</th>
+                                                <th>Qty</th>
+                                                <th>Original Price</th>
+                                                <th>Selling Price</th>
+                                                <th>Tax</th>
+                                                <th>Trending</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                           </thead>
                                           <tbody>
-                                            @forelse ($categories as $category)
+                                            @forelse ($products as $product)
                                                 <tr>
                                                     <td>
                                                         <div class="chk-option">
@@ -73,22 +78,27 @@
                                                             </div>
                                                         </div>
                                                         <div class="d-inline-block align-middle">
-                                                            <img src="{{asset('image/'.$category->image)}}" alt="{{$category->name}}" class="img-radius img-40 align-top m-r-15">
+                                                            <img src="{{asset('product/'.$product->image)}}" alt="{{$product->name}}" class="img-radius img-40 align-top m-r-15">
                                                             <div class="d-inline-block">
-                                                                <h6>{{$category->name}}</h6>
-                                                                <p class="text-muted m-b-0">{{$category->description}}</p>
+                                                                <h6>{{$product->name}}</h6>
+                                                                <p class="text-muted m-b-0">{{$product->description}}</p>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{$category->name}}</td>
-                                                    <td>{{$category->created_at->format('Y-m-d')}}</td>
+                                                    <td>{{$product->name}}</td>
+                                                    <td>{{$product->category->name}}</td>
+                                                    <td>{{$product->quantity}}</td>
+                                                    <td>{{$product->original_price}} $</td>
+                                                    <td>{{$product->selling_price}} $</td>
+                                                    <td>{{$product->tax}} $</td>
+                                                    <td>{{$product->trending=='1' ? 'Enabled' : 'Disabled'}}</td>
                                                     <td>
-                                                        {{$category->status == '1' ? 'Active':'Disabled'}}
+                                                        {{$product->status == '1' ? 'Active':'Disabled'}}
                                                     </td>
                                                     <td>
-                                                        <form action="{{ route('categories.destroy',$category->id) }}" method="POST">
+                                                        <form action="{{ route('products.destroy',$product->id) }}" method="POST">
 
-                                                            <a class="btn btn-mat btn-sm waves-effect waves-light btn-info" href="{{ route('categories.edit',$category->id) }}">Edit</a>
+                                                            <a class="btn btn-mat btn-sm waves-effect waves-light btn-info" href="{{ route('products.edit',$product->id) }}">Edit</a>
 
                                                             @csrf
                                                             @method('DELETE')
@@ -103,13 +113,16 @@
                                                 <td colspan="5" class="text-center text-danger">
 
                                                     <div class="d-inline-block align-middle">
-                                                        <h4>No Categories added</h4>
+                                                        <h4>No Products added</h4>
                                                     </div>
                                                 </td>
+
                                             </tr>
                                             @endforelse
+
                                           </tbody>
                                       </table>
+
                                   </div>
                               </div>
                           </div>
