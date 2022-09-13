@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,7 @@ class ProductController extends Controller
             $input['image'] = "$profileImage";
         }
         $input['category_id'] = $request->category_id;
+        $input['slug'] = $request->slug;
         $input['trending'] = $request->trending == true ? '1':'0';
         $input['status'] = $request->status == true ? '1':'0';
         $input['created_by'] = Auth::user()->id;

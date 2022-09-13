@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,22 +18,17 @@ use App\Http\Controllers\Admin\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('shop', [FrontendController::class, 'shop']);
+Route::get('contacts', [FrontendController::class, 'contact']);
+Route::get('category/{category_slug}/product/{product_slug}', [FrontendController::class, 'viewProducts']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-// Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
-//     // Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
-
-//     Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
-
-// });
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth','isAdmin'])->group(function () {
@@ -40,8 +36,5 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
-
-    // Route::get('/categories', [CategoryController::class, 'index']);
-    // Route::get('/add-category', [CategoryController::class, 'create']);
-    // Route::post('/add-category', [CategoryController::class, 'store']);
+   
 });
