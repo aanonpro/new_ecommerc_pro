@@ -18,7 +18,9 @@
       <div class="container">
           <div class="row">
               <div class="col-lg-6 mb-5 ftco-animate">
-                  <a href="{{asset('product/'.$products->image)}}" class="image-popup prod-img-bg"><img src="{{asset('product/'.$products->image)}}" class="img-fluid" alt="Colorlib Template"></a>
+                    <a href="{{asset('product/'.$products->image)}}" class="image-popup prod-img-bg">
+                        <img src="{{asset('product/'.$products->image)}}" class="img-fluid" alt="Colorlib Template">
+                    </a>
               </div>
               <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                   <h3>{{$products->name}}</h3>
@@ -94,7 +96,7 @@
           </div>
         </div>
         <div class="col-md-12 tab-wrap">
-          
+
           <div class="tab-content bg-light" id="v-pills-tabContent">
 
             <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="day-1-tab">
@@ -243,6 +245,6 @@
       </div>
   </section>
 
-  
+
 
 @endsection

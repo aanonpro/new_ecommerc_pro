@@ -24,6 +24,8 @@ use App\Http\Controllers\Frontend\FrontendController;
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('shop', [FrontendController::class, 'shop']);
 Route::get('contacts', [FrontendController::class, 'contact']);
+Route::get('all-categories', [FrontendController::class, 'category']);
+Route::get('category/{category_slug}', [FrontendController::class, 'viewCategory']);
 Route::get('category/{category_slug}/product/{product_slug}', [FrontendController::class, 'viewProducts']);
 
 Auth::routes();
@@ -36,5 +38,5 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
-   
+
 });

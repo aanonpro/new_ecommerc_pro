@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -43,6 +44,7 @@ class CategoryController extends Controller
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
         }
+        $input['slug'] = Str::slug($request->slug);
         $input['popular'] = $request->popular == true ? '1':'0';
 
         Category::create($input);
@@ -64,7 +66,7 @@ class CategoryController extends Controller
         return view('admin.category.edit',compact('category'));
     }
 
-    //update 
+    //update
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -86,6 +88,7 @@ class CategoryController extends Controller
                 $input['image'] = "$profileImage";
             }
         }
+        $input['slug'] = Str::slug($request->slug);
         $input['popular'] = $request->popular == true ? '1':'0';
         $category->update($input);
 
@@ -93,7 +96,7 @@ class CategoryController extends Controller
                         ->with('message','Category updated successfully');
     }
 
-    // delete 
+    // delete
     public function destroy(Category $category)
     {
         if($category->image){

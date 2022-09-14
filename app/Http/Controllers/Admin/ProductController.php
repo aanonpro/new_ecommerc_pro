@@ -12,21 +12,21 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    
+
     public function index()
     {
         $products = Product::all();
         return view('admin.product.index', compact('products'));
     }
 
-    
+
     public function create()
     {
         $categories = Category::all();
         return view('admin.product.create',  compact('categories'));
     }
 
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -49,7 +49,7 @@ class ProductController extends Controller
             $input['image'] = "$profileImage";
         }
         $input['category_id'] = $request->category_id;
-        $input['slug'] = $request->slug;
+        $input['slug'] = Str::slug($request->slug);
         $input['trending'] = $request->trending == true ? '1':'0';
         $input['status'] = $request->status == true ? '1':'0';
         $input['created_by'] = Auth::user()->id;
@@ -60,20 +60,20 @@ class ProductController extends Controller
                         ->with('message','Products added successfully');
     }
 
-    
+
     public function show(Product $product)
     {
         //
     }
 
-    
+
     public function edit(Product $product)
     {
         $categories = Category::all();
         return view('admin.product.edit', compact('product','categories'));
     }
 
-    
+
     public function update(Request $request, Product $product)
     {
         $request->validate([
@@ -102,6 +102,7 @@ class ProductController extends Controller
             }
         }
         $input['category_id'] = $request->category_id;
+        $input['slug'] = Str::slug($request->slug);
         $input['trending'] = $request->trending == true ? '1':'0';
         $input['status'] = $request->status == true ? '1':'0';
         $input['created_by'] = Auth::user()->id;

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    
+
 <section id="home-section" class="hero">
     <div class="home-slider owl-carousel">
     <div class="slider-item js-fullheight">
@@ -16,7 +16,7 @@
                     <div class="horizontal">
                       <h1 class="mb-4 mt-3">Shoes Collection 2019</h1>
                       <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-                      
+
                       <p><a href="#" class="btn-custom">Discover Now</a></p>
                     </div>
               </div>
@@ -36,7 +36,7 @@
                     <div class="horizontal">
                       <h1 class="mb-4 mt-3">New Shoes Winter Collection</h1>
                       <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country.</p>
-                      
+
                       <p><a href="#" class="btn-custom">Discover Now</a></p>
                     </div>
               </div>
@@ -48,44 +48,44 @@
 </section>
 
 <section class="ftco-section ftco-no-pt ftco-no-pb">
-      <div class="container">
-          <div class="row no-gutters ftco-services">
-    <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-      <div class="media block-6 services p-4 py-md-5">
-        <div class="icon d-flex justify-content-center align-items-center mb-4">
-              <span class="flaticon-bag"></span>
+    <div class="container">
+        <div class="row no-gutters ftco-services">
+            <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services p-4 py-md-5">
+                <div class="icon d-flex justify-content-center align-items-center mb-4">
+                    <span class="flaticon-bag"></span>
+                </div>
+                <div class="media-body">
+                <h3 class="heading">Free Shipping</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services p-4 py-md-5">
+                <div class="icon d-flex justify-content-center align-items-center mb-4">
+                    <span class="flaticon-customer-service"></span>
+                </div>
+                <div class="media-body">
+                <h3 class="heading">Support Customer</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services p-4 py-md-5">
+                <div class="icon d-flex justify-content-center align-items-center mb-4">
+                    <span class="flaticon-payment-security"></span>
+                </div>
+                <div class="media-body">
+                <h3 class="heading">Secure Payments</h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                </div>
+            </div>
+            </div>
         </div>
-        <div class="media-body">
-          <h3 class="heading">Free Shipping</h3>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-        </div>
-      </div>      
     </div>
-    <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-      <div class="media block-6 services p-4 py-md-5">
-        <div class="icon d-flex justify-content-center align-items-center mb-4">
-              <span class="flaticon-customer-service"></span>
-        </div>
-        <div class="media-body">
-          <h3 class="heading">Support Customer</h3>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-        </div>
-      </div>    
-    </div>
-    <div class="col-lg-4 text-center d-flex align-self-stretch ftco-animate">
-      <div class="media block-6 services p-4 py-md-5">
-        <div class="icon d-flex justify-content-center align-items-center mb-4">
-              <span class="flaticon-payment-security"></span>
-        </div>
-        <div class="media-body">
-          <h3 class="heading">Secure Payments</h3>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-        </div>
-      </div>      
-    </div>
-  </div>
-      </div>
-  </section>
+</section>
 
 <section class="ftco-section bg-light">
   <div class="container">
@@ -94,21 +94,23 @@
         <h2 class="mb-4">New Products Arrival</h2>
         <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
         </div>
-    </div>   		
+    </div>
   </div>
   <div class="container">
       <div class="row">
         @foreach ($arrival_products as $arrival_product)
             <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
                 <div class="product d-flex flex-column">
-                    <a href="{{url('category/'.$arrival_product->category->slug.'/product/'.$arrival_product->slug )}}}" class="img-prod"><img class="img-fluid" src="{{asset('product/'.$arrival_product->image)}}" alt="Colorlib Template">
+                    <a href="{{url('category/'.$arrival_product->category->slug.'/product/'.$arrival_product->slug)}}" class="img-prod"><img class="img-fluid" src="{{asset('product/'.$arrival_product->image)}}" alt="Colorlib Template">
                         <span class="status">50% Off</span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3">
                         <div class="d-flex">
                             <div class="cat">
-                                <span>{{$arrival_product->category->name}}</span>
+                                <a href="{{url('category/'.$arrival_product->category->slug)}}">
+                                    <span>{{$arrival_product->category->name}}</span>
+                                </a>
                             </div>
                             <div class="rating">
                                 <p class="text-right mb-0">
@@ -120,7 +122,7 @@
                                 </p>
                             </div>
                         </div>
-                        <h3><a href="#">{{$arrival_product->name}}</a></h3>
+                        <h3><a href="{{url('category/'.$arrival_product->category->slug.'/product/'.$arrival_product->slug)}}">{{$arrival_product->name}}</a></h3>
                         <div class="pricing">
                             <p class="price">
                               <span>$ {{$arrival_product->selling_price}}</span>
@@ -135,13 +137,13 @@
                 </div>
             </div>
         @endforeach
-          
+
       </div>
   </div>
 </section>
 
 
-{{-- 
+{{--
 <section class="ftco-section ftco-choose ftco-no-pb ftco-no-pt">
   <div class="container">
           <div class="row no-gutters">

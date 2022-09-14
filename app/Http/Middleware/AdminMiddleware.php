@@ -24,12 +24,12 @@ class AdminMiddleware
                 return $next($request);
             }
             else{
-                return redirect('/home')->with('status','Access Denied! you are not as admin');
+                return redirect('/')->with('status','Access Denied! you are not as admin');
             }
         }
         else
         {
-            return redirect('/home')->with('status','please log in first');
+            return redirect('/')->with('status','please log in first');
         }
     }
 }
