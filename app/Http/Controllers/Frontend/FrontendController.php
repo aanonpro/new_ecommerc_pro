@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class FrontendController extends Controller
 {
     public function index(){
-        $arrival_products = Product::where('trending','1')->where('status', '1')->latest()->take(8)->get();
+        $arrival_products = Product::where('trending','1')->where('status', '1')->orderBy('id','desc')->latest()->take(8)->get();
         return view('frontend.index', compact('arrival_products'));
     }
 
@@ -20,6 +20,7 @@ class FrontendController extends Controller
     }
 
     public function shop(){
+       
         $products = Product::where('status','1')->get();
         return view('frontend.shop',compact('products'));
     }
@@ -33,7 +34,7 @@ class FrontendController extends Controller
         if(Category::where('slug',$category_slug)->exists()){
             $category = Category::where('slug',$category_slug)->first();
             $products= Product::where('category_id',$category->id)->where('status','1')->get();
-            return view('frontend.category',compact('category','products'));
+            return view('frontend.shop',compact('category','products'));
         }
     }
 

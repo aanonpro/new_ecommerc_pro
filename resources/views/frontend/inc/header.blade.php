@@ -58,14 +58,14 @@
                 </li>
             @endif
           @else
-          <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+          <li class="nav-item cta cta-colored"><a href="{{url('cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }}
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{url('carts')}}">My Cart</a>
+                  <a class="dropdown-item" href="{{url('cart')}}">My Cart</a>
                   <hr style="border-bottom: 1px solid rgb(107, 101, 101);">
                     <a class="dropdown-item" href="{{ route('logout') }}"
                       onclick="event.preventDefault();

@@ -99,10 +99,13 @@
   <div class="container">
       <div class="row">
         @foreach ($arrival_products as $arrival_product)
-            <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex">
+            <div class="col-sm-12 col-md-6 col-lg-3 ftco-animate d-flex ">
                 <div class="product d-flex flex-column">
                     <a href="{{url('category/'.$arrival_product->category->slug.'/product/'.$arrival_product->slug)}}" class="img-prod"><img class="img-fluid" src="{{asset('product/'.$arrival_product->image)}}" alt="Colorlib Template">
-                        <span class="status">50% Off</span>
+                        @php
+                            $results = ($arrival_product->original_price - $arrival_product->selling_price) * 100  / $arrival_product->original_price ;
+                        @endphp
+                      <span class="status">{{ number_format($results)}}% Off</span>
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3">
@@ -124,13 +127,14 @@
                         </div>
                         <h3><a href="{{url('category/'.$arrival_product->category->slug.'/product/'.$arrival_product->slug)}}">{{$arrival_product->name}}</a></h3>
                         <div class="pricing">
+                          {{-- <input type="hidden" value="{{$arrival_product->id}}" class="prod_id"> --}}
                             <p class="price">
                               <span>$ {{$arrival_product->selling_price}}</span>
                               <span class="float-right"> <s>$ {{$arrival_product->original_price}}</s></span>
                             </p>
                         </div>
                         <p class="bottom-area d-flex px-3">
-                            <a href="#" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+                            <a href="{{url('category/'.$arrival_product->category->slug.'/product/'.$arrival_product->slug)}}" class="add-to-cart text-center py-2 mr-1 "><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
                             <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
                         </p>
                     </div>

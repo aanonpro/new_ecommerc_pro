@@ -3,7 +3,9 @@
   <head>
     <title>Minishop - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
@@ -54,6 +56,19 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="{{ asset('frontend/js/google-map.js')}}"></script>
   <script src="{{ asset('frontend/js/main.js')}}"></script>
-    
+
+   {{-- sweetalert --}}
+   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+   @if(session('message'))
+      <script>
+          swal("Successfully", "{{session('message')}}", "success");
+      </script>
+   @endif
+
+
+  @yield('script')
+  
+
   </body>
 </html>
