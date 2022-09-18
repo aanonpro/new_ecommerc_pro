@@ -62,32 +62,35 @@
                           <div class="w-100"></div>
                     <div class="input-group col-md-6 d-flex mb-3">
                         <input type="hidden" value="{{$products->id}}" class="prod_id">
-                        <span class="input-group-btn mr-2">
-                            <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
-                            <i class="ion-ios-remove"></i>
-                            </button>
-                        </span>
-                        <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-                        <span class="input-group-btn ml-2">
-                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                            <i class="ion-ios-add"></i>
-                            </button>
-                        </span>
+                       
+                            <span class="input-group-btn mr-2">
+                                <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
+                                <i class="ion-ios-remove"></i>
+                                </button>
+                            </span>
+                            <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+                            <span class="input-group-btn ml-2">
+                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                <i class="ion-ios-add"></i>
+                                </button>
+                            </span>
+                        
                     </div>
                 <div class="w-100"></div>
                 <div class="col-md-12">
                     @if ($products->quantity > 0)
-                    <p style="color: #000;">In stock {{$products->quantity}} Availables</p>                        
+                    <p style="color: #000;"><span class="btn btn-outline-primary">In stock</span>  {{$products->quantity}} Availables</p>                        
                     @else
-                    <p style="color: #000;">Out Stock</p>                       
+                    <p style="color: #000;" class="btn btn-danger text-white">Out Stock</p>                       
                         
                     @endif
                 </div>
             </div>
             <p>
+                @if ($products->quantity > 0)
                 <a href="{{url('add-to-cart')}}" class="btn btn-black py-3 px-5 mr-2 addToCart">Add to Cart</a>
-                {{-- <button class="btn btn-primary addToCart" > to Cart </button> --}}
-                <a href="" class="btn btn-primary py-3 px-5">Buy now</a>
+                @endif
+                <a href="" class="btn btn-primary py-3 px-5">Add to wishlist</a>
             </p>
               </div>
           </div>
