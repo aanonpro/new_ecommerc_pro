@@ -40,7 +40,7 @@
                             <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
                         </p>
                     </div>
-                
+
                   <p class="price"><span class="price_id">${{$products->selling_price}}</span></p>
                   <p>{{$products->slug}}</p>
                   <p class="des">{{$products->description}}</p>
@@ -62,7 +62,7 @@
                           <div class="w-100"></div>
                     <div class="input-group col-md-6 d-flex mb-3">
                         <input type="hidden" value="{{$products->id}}" class="prod_id">
-                       
+
                             <span class="input-group-btn mr-2">
                                 <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field="">
                                 <i class="ion-ios-remove"></i>
@@ -74,15 +74,15 @@
                                 <i class="ion-ios-add"></i>
                                 </button>
                             </span>
-                        
+
                     </div>
                 <div class="w-100"></div>
                 <div class="col-md-12">
                     @if ($products->quantity > 0)
-                    <p style="color: #000;"><span class="btn btn-outline-primary">In stock</span>  {{$products->quantity}} Availables</p>                        
+                    <p style="color: #000;"><span class="btn btn-outline-primary">In stock</span>  {{$products->quantity}} Availables</p>
                     @else
-                    <p style="color: #000;" class="btn btn-danger text-white">Out Stock</p>                       
-                        
+                    <p style="color: #000;" class="btn btn-danger text-white">Out Stock</p>
+
                     @endif
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 @if ($products->quantity > 0)
                 <a href="{{url('add-to-cart')}}" class="btn btn-black py-3 px-5 mr-2 addToCart">Add to Cart</a>
                 @endif
-                <a href="" class="btn btn-primary py-3 px-5">Add to wishlist</a>
+                <a href="{{url('add-to-wishlist')}}" class="btn btn-primary addToWishlist py-3 px-5">Add to wishlist</a>
             </p>
               </div>
           </div>
@@ -274,7 +274,7 @@
         var product_qty = $(this).closest('.product_data').find('#quantity').val();
         // var product_price = $(this).closest('.product_data').find('.price_id').val();
         // var product_des = $(this).closest('.product_data').find('.des').val();
-        
+
         $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -287,7 +287,7 @@
           data: {
               'product_id' : product_id,
             //   'product_price' : product_price,
-              'product_qty' : product_qty,              
+              'product_qty' : product_qty,
             //   'product_des' : product_des,
           },
           success: function (response){
@@ -297,22 +297,45 @@
 
       });
 
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+      $('.addToWishlist').click(function (e){
+        e.preventDefault();
+        var product_id = $(this).closest('.product_data').find('.prod_id').val();
+
+        $.ajax({
+            method: "POST",
+            url: "/add-to-wishlist",
+            data: {
+                'product_id' : product_id,
+            },
+            success: function (response){
+                swal(response.message)
+            }
+        });
+
+    });
+
     var quantitiy=0;
        $('.quantity-right-plus').click(function(e){
-            
+
             // Stop acting like a button
             e.preventDefault();
             // Get the field name
             var quantity = parseInt($('#quantity').val());
 
-            
+
             // If is not undefined
-                
+
                 $('#quantity').val(quantity + 1);
 
-              
+
                 // Increment
-            
+
         });
 
          $('.quantity-left-minus').click(function(e){
@@ -320,15 +343,15 @@
             e.preventDefault();
             // Get the field name
             var quantity = parseInt($('#quantity').val());
-            
+
             // If is not undefined
-          
+
                 // Increment
                 if(quantity>0){
                 $('#quantity').val(quantity - 1);
                 }
         });
-        
+
     });
 </script>
 

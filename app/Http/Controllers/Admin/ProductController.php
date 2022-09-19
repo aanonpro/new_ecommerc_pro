@@ -36,7 +36,7 @@ class ProductController extends Controller
             'selling_price' => 'required',
             'quantity' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
         ]);
 
         $input = $request->all();
@@ -83,7 +83,7 @@ class ProductController extends Controller
             'selling_price' => 'required',
             'quantity' => 'required',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,webp,jpg,gif,svg|max:2048',
         ]);
 
         $input = $request->all();

@@ -13,8 +13,6 @@ class CartController extends Controller
     public function addProduct(Request $request){
         $product_id = $request->input('product_id');
         $product_qty = $request->input('product_qty');
-        // $product_price = $request->input('product_price');
-        // $product_des = $request->input('product_des');
 
         if(Auth::check())
         {
@@ -69,9 +67,9 @@ class CartController extends Controller
             }
         }
         else{
-           
+
             return response()->json(['message' => 'Login to continue']);
-            
+
         }
     }
 }

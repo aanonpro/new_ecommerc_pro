@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 class FrontendController extends Controller
 {
     public function index(){
+
         $arrival_products = Product::where('trending','1')->where('status', '1')->orderBy('id','desc')->latest()->take(8)->get();
         return view('frontend.index', compact('arrival_products'));
     }
@@ -20,7 +21,7 @@ class FrontendController extends Controller
     }
 
     public function shop(){
-       
+
         $products = Product::where('status','1')->get();
         return view('frontend.shop',compact('products'));
     }

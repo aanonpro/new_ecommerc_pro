@@ -53,7 +53,7 @@ class CheckoutController extends Controller
             $total += $prod->products->selling_price * $prod->prod_qty;
         }
         $order->total_price = $total;
-    
+
         $order->save();
 
         $cartitems = Cart::where('user_id', Auth::id())->get();
@@ -64,7 +64,7 @@ class CheckoutController extends Controller
                 'prod_id' => $item->prod_id,
                 'qty' => $item->prod_qty,
                 'price' => $item->products->selling_price,
-            ]); 
+            ]);
 
             $prod = Product::where('id', $item->prod_id)->first();
             $prod->quantity = $prod->quantity - $item->prod_qty;

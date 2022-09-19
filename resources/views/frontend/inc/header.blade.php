@@ -19,6 +19,11 @@
         </div>
       </div>
 </div>
+@php
+    $wishlists = App\Models\Wishlist::count();
+    $carts = App\Models\Cart::count();
+@endphp
+
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
     <div class="container">
       <a class="navbar-brand" href="{{url('/')}}">Minishop</a>
@@ -46,7 +51,8 @@
                 </li>
             @endif
           @else
-          <li class="nav-item  {{ Request::is('cart') ? 'cta cta-colored  active':'' }}"><a href="{{url('cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+          <li class="nav-item  {{ Request::is('cart') ? 'cta cta-colored  active':'' }}"><a href="{{url('cart')}}" class="nav-link"><span class="icon-shopping_cart"></span>[{{$carts}}]</a></li>
+          <li class="nav-item  {{ Request::is('wishlist') ? 'cta cta-colored  active':'' }}"><a href="{{url('wishlist')}}" class="nav-link"><span class="icon-heart"></span>[{{ $wishlists }}]</a></li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }}
