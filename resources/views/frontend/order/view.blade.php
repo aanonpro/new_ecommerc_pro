@@ -58,15 +58,15 @@
                         </p>
 
                         <hr>
-                        <p class="d-flex total-price">
+                        {{-- <p class="d-flex total-price">
                             <span>Total</span>
                             <span>${{$orders->total_price}}</span>
-                        </p>
+                        </p> --}}
                     </div>
                 </div>
                 <div class="col-md-6 d-flex">
                     <div class="cart-detail cart-total bg-light p-3 p-md-4">
-                        <h3 class="billing-heading mb-4">My Details</h3>
+                        <h3 class="billing-heading mb-4">Order Details</h3>
                         <p class="d-flex " style="font-weight: bold;">
                             <span>Name </span>
                             <span>Qty</span>
@@ -88,8 +88,8 @@
                                                   
                         <hr>
                         <p class="d-flex total-price">
-                            <span>Total</span>
-                            <span>$17.60</span>
+                            <span>Grand Total</span>
+                            <span>${{$orders->total_price}}</span>
                         </p>
                     </div>
                 </div>

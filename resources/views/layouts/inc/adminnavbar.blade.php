@@ -74,5 +74,22 @@
                 </a>
             </li>
         </ul>     
+        <div class="pcoded-navigation-label" data-i18n="nav.category.forms">Table Lists</div>
+        <ul class="pcoded-item pcoded-left-item">
+            <li class="{{ (request()->is('orders')) ? 'active' : '' }}">
+                <a href="{{url('orders')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Orders</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+            <li class="{{ (request()->is('users')) ? 'active' : '' }}">
+                <a href="{{url('users')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-layers"></i><b>FC</b></span>
+                    <span class="pcoded-mtext" data-i18n="nav.form-components.main">Users</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+        </ul>     
     </div>
 </nav>
