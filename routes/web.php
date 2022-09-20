@@ -36,6 +36,9 @@ Route::get('category/{category_slug}/product/{product_slug}', [FrontendControlle
 
 Auth::routes();
 
+Route::get('load-cart-data', [CartController::class, 'cartCount']);
+Route::get('load-wishlist-count', [WishlistController::class, 'wishlistCount']);
+
 Route::post('add-to-cart', [CartController::class, 'addProduct']);
 Route::post('delete-cart-item', [CartController::class, 'deleteproduct']);
 Route::post('update-cart', [CartController::class, 'updateCart']);

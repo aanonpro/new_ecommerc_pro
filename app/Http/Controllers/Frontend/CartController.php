@@ -37,11 +37,13 @@ class CartController extends Controller
             return response()->json(['message' => 'Login to continue']);
         }
     }
+    //end add to cart
 
     public function viewCart(){
         $cartitems = Cart::where('user_id', Auth::id())->get();
         return view('frontend.cart',compact('cartitems'));
     }
+    //end view cart
 
     public function updateCart(Request $request){
         $prod_id = $request->input('prod_id');
@@ -56,6 +58,7 @@ class CartController extends Controller
             }
         }
     }
+    //end update cart
 
     public function deleteproduct(Request $request){
         if(Auth::check()){
@@ -71,5 +74,11 @@ class CartController extends Controller
             return response()->json(['message' => 'Login to continue']);
 
         }
+    }
+    //end delete product
+
+    public function cartCount(){
+        $cartcounts = Cart::where('user_id', Auth::id())->count();
+        return response()->json(['count' => $cartcounts]);
     }
 }

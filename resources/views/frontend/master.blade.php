@@ -57,6 +57,8 @@
   <script src="{{ asset('frontend/js/google-map.js')}}"></script>
   <script src="{{ asset('frontend/js/main.js')}}"></script>
 
+  <script src="{{ asset('frontend/js/custom.js') }}"></script>
+
    {{-- sweetalert --}}
    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
